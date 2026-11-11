@@ -14,8 +14,75 @@
   <link rel="stylesheet" href="v2.css?v=3">
   <script src="elevator.js?v=3" defer></script>
   <script src="app.js?v=3" defer></script>
+  <style>
+    #entry-boot[open] {
+      position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none;
+      box-sizing: border-box; margin: 0; padding: clamp(18px, 5vw, 64px); border: 0; border-radius: 0;
+      display: grid; place-items: center; overflow: hidden; color: #b2c7b5; box-shadow: none;
+      font: 700 12px/1.55 Consolas, "Space Mono", monospace; letter-spacing: .045em;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 3px, #0004 3px 4px),
+        radial-gradient(ellipse at 50% 48%, #173424, #080d0a 62%);
+      animation: entry-lift .38s cubic-bezier(.7, 0, .25, 1) 1.10s both;
+    }
+    #entry-boot::backdrop { background: none; backdrop-filter: none; }
+    .entry-console { width: min(100%, 500px); box-sizing: border-box; border: 1px solid #365746; border-radius: 7px; background: #080f0bea; }
+    .entry-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-bottom: 1px solid #365746; }
+    .entry-top span { color: #86ffa5; }
+    .entry-skip { color: #d5ead9; border: 1px solid #527461; border-radius: 4px; background: #14291c; padding: 4px 8px; font: inherit; cursor: pointer; }
+    .entry-skip:focus-visible { outline: 2px solid #86ffa5; outline-offset: 3px; }
+    .entry-core { padding: clamp(16px, 5vw, 32px); }
+    .entry-core p { margin: 0 0 7px; }
+    .entry-core b { color: #86ffa5; }
+    .entry-command { color: #e2ffe8; white-space: nowrap; overflow: hidden; width: 26ch; max-width: 100%; animation: entry-type .35s steps(24, end) both; }
+    .entry-line { animation: entry-log .01s .43s both; }
+    .entry-line + .entry-line { animation-delay: .7s; }
+    .entry-meter { display: block; margin-top: 16px; height: 6px; border: 1px solid #4d855d; background: #13251a; overflow: hidden; }
+    .entry-meter::after { content: ""; display: block; height: 100%; transform-origin: left; background: repeating-linear-gradient(90deg, #86ffa5 0 7px, #467952 7px 9px); animation: entry-fill .94s steps(26, end) both; }
+    @keyframes entry-type { from { width: 0; } }
+    @keyframes entry-log { from { opacity: 0; } }
+    @keyframes entry-fill { from { transform: scaleX(0); } }
+    @keyframes entry-lift { from { clip-path: inset(0); opacity: 1; } to { clip-path: inset(0 0 100% 0); opacity: .7; } }
+    @media (prefers-reduced-motion: reduce) { #entry-boot[open] { display: none; } }
+  </style>
 </head>
 <body id="top">
+  <dialog id="entry-boot" aria-labelledby="entry-label">
+    <div class="entry-console">
+      <div class="entry-top"><span id="entry-label">NOTEX_OS / BOOT CONSOLE</span><button class="entry-skip" type="button" autofocus>Skip intro</button></div>
+      <div class="entry-core" aria-hidden="true">
+        <p class="entry-command"><b>&gt;</b> load after_dark.profile</p>
+        <p class="entry-line"><b>[ OK ]</b> Verify project archive</p>
+        <p class="entry-line"><b>[ READY ]</b> Session unlocked</p>
+        <span class="entry-meter"></span>
+      </div>
+    </div>
+  </dialog>
+  <script>
+    (() => {
+      const dialog = document.getElementById("entry-boot");
+      const motion = matchMedia("(prefers-reduced-motion: reduce)");
+      if (motion.matches || (location.hash && location.hash !== "#top") || typeof dialog.showModal !== "function") return;
+      try {
+        if (sessionStorage.getItem("after-dark-entry-seen")) return;
+        sessionStorage.setItem("after-dark-entry-seen", "1");
+      } catch { /* A blocked storage API does not block the page. */ }
+      let fallback;
+      const finish = () => {
+        clearTimeout(fallback);
+        motion.removeEventListener("change", finish);
+        if (dialog.open) dialog.close();
+      };
+      dialog.querySelector(".entry-skip").addEventListener("click", finish, { once: true });
+      dialog.addEventListener("close", finish, { once: true });
+      dialog.addEventListener("animationend", (event) => {
+        if (event.target === dialog && event.animationName === "entry-lift") finish();
+      });
+      motion.addEventListener("change", finish);
+      dialog.showModal();
+      fallback = setTimeout(finish, 1550);
+    })();
+  </script>
   <a class="skip" href="#work">Skip to projects</a>
   <div class="cursor" aria-hidden="true"><span></span><i></i></div>
   <header class="header">
