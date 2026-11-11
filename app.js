@@ -14,6 +14,89 @@ function boot(timestamp, started = timestamp) {
 }
 requestAnimationFrame(boot);
 
+const roleText = document.querySelector("#role-text");
+const crtStatus = document.querySelector("#crt-status");
+const motionToggle = document.querySelector(".motion-toggle");
+const hero = document.querySelector(".hero");
+const roleFrames = [
+  ["Game developer", "[ READY ] Portfolio loaded"],
+  ["3D, VFX & shader artist", "[ ART ] Materials / lighting / VFX"],
+  ["Python, C# & HTML programmer", "[ CODE ] Python / C# / HTML"],
+  ["Junior ethical hacker", "[ SEC ] Learning defensive security"],
+  ["Entrepreneur", "[ DEV ] The Last Peg / five seats"],
+  ["Founder of NoteX Studios", "[ SHIPPED ] Phantom Echoes / Steam"]
+];
+
+let roleIndex = 0;
+let characterCount = roleFrames[0][0].length;
+let erasingRole = true;
+let roleTimer;
+let rolePaused = false;
+let heroVisible = true;
+
+function scheduleRole(delay) {
+  clearTimeout(roleTimer);
+  if (!rolePaused && heroVisible && !document.hidden && !reducedMotion.matches) {
+    roleTimer = setTimeout(advanceRole, delay);
+  }
+}
+
+function advanceRole() {
+  if (document.querySelector("dialog[open]")) {
+    scheduleRole(500);
+    return;
+  }
+  const [label, status] = roleFrames[roleIndex];
+  characterCount += erasingRole ? -1 : 1;
+  roleText.textContent = label.slice(0, characterCount);
+  if (erasingRole && characterCount === 0) {
+    roleIndex = (roleIndex + 1) % roleFrames.length;
+    erasingRole = false;
+    scheduleRole(160);
+  } else if (!erasingRole && characterCount === label.length) {
+    crtStatus.textContent = status;
+    crtStatus.animate?.([{ opacity: .25 }, { opacity: 1 }], { duration: 240 });
+    erasingRole = true;
+    scheduleRole(2800);
+  } else {
+    scheduleRole(erasingRole ? 33 : 61);
+  }
+}
+
+motionToggle.addEventListener("click", () => {
+  rolePaused = !rolePaused;
+  if (rolePaused) {
+    const [label, status] = roleFrames[roleIndex];
+    roleText.textContent = label;
+    crtStatus.textContent = status;
+    characterCount = label.length;
+    erasingRole = true;
+  }
+  document.documentElement.classList.toggle("text-paused", rolePaused);
+  motionToggle.textContent = rolePaused ? "Resume text" : "Pause text";
+  scheduleRole(1900);
+});
+document.addEventListener("visibilitychange", () => scheduleRole(1900));
+if ("IntersectionObserver" in window) {
+  new IntersectionObserver(([entry]) => {
+    heroVisible = entry.isIntersecting;
+    scheduleRole(1900);
+  }, { threshold: .15 }).observe(hero);
+}
+function syncMotionPreference() {
+  motionToggle.hidden = reducedMotion.matches;
+  if (reducedMotion.matches) {
+    const [label, status] = roleFrames[roleIndex];
+    roleText.textContent = label;
+    crtStatus.textContent = status;
+    characterCount = label.length;
+    erasingRole = true;
+  }
+  scheduleRole(1900);
+}
+reducedMotion.addEventListener("change", syncMotionPreference);
+syncMotionPreference();
+
 const cursor = document.querySelector(".cursor");
 const cursorText = cursor.querySelector("i");
 let cursorFrame = 0;

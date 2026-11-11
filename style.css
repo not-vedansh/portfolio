@@ -32,6 +32,10 @@ h1{font-size:clamp(65px,7.9vw,123px);font-weight:900;letter-spacing:-.092em;line
 h1>span{color:var(--green)}
 .period{color:var(--ink)}
 .hero-tag{margin:0 0 10px;font-size:clamp(23px,3vw,35px);font-weight:750;line-height:1.15;letter-spacing:-.05em}
+.role-loop{height:1.65em;margin:0 0 12px;color:var(--green);font:700 clamp(12px,1.7vw,15px)/1.65 var(--mono);white-space:nowrap}
+.role-prompt{color:#a6b5a8}
+.role-caret{display:inline-block;width:.47em;height:.94em;vertical-align:-.1em;margin-left:.28em;background:currentColor;animation:blink 1s steps(2,end) infinite}
+.text-paused .role-caret,.text-paused .caret{animation-play-state:paused;opacity:1}
 .intro-copy{max-width:410px;color:var(--muted);margin:0}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .button{display:inline-flex;align-items:center;justify-content:center;gap:13px;min-height:47px;padding:0 16px;border-radius:5px;font-size:13px;font-weight:800;transition:transform .2s,box-shadow .2s,background .2s}
@@ -44,6 +48,8 @@ h1>span{color:var(--green)}
 .scene-index span:last-child{color:var(--green)}
 .scene-bottom{top:auto;bottom:17px}
 .scene-bottom span:last-child{color:#91a995}
+.motion-toggle{padding:3px 6px;margin:-3px -6px;color:#a5bda9;background:transparent;border:1px solid #47624d;border-radius:3px;font:inherit;letter-spacing:.035em}
+.motion-toggle:hover,.motion-toggle:focus-visible{color:var(--green);border-color:var(--green)}
 .floor-glow{position:absolute;bottom:9%;left:15%;width:70%;height:19%;border-radius:50%;background:#87ffaa;filter:blur(49px);opacity:.2}
 .computer{width:78%;max-width:455px;position:relative;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .18s ease-out}
 .monitor{position:relative;border:1px solid #6b7c6c;border-radius:24px;padding:18px 18px 0;background:linear-gradient(145deg,#626d60,#2c3930 28%,#14211a 74%,#415244);box-shadow:9px 10px 0 #122018,16px 20px 0 #0b130f,24px 31px 35px #030705bb,inset 0 2px 3px #b6c5b281}

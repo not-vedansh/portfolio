@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=2">
+  <script src="app.js?v=2" defer></script>
 </head>
 <body id="top">
   <a class="skip" href="#work">Skip to projects</a>
@@ -31,6 +31,7 @@
         <p class="eyebrow"><span class="status-dot"></span> INDEPENDENT CREATOR <span class="slash">/</span> INDIA</p>
         <h1 id="hero-title">VEDANSH<br><span>YADAV<span class="period">.</span></span></h1>
         <p class="hero-tag">I build worlds after dark.</p>
+        <p class="role-loop" aria-hidden="true"><span class="role-prompt">&gt;</span> <span id="role-text">Game developer</span><span class="role-caret"></span></p>
         <p class="intro-copy">Game developer, VFX and shader artist, and founder of NoteX Studios. I build the systems, effects, and environments that make a game feel alive.</p>
         <div class="actions">
           <a class="button solid" href="#work">View projects <span aria-hidden="true">↘</span></a>
@@ -50,7 +51,7 @@
                   <p><span class="boot-prompt">vedansh@studio:~$</span> <span id="boot-type"></span><b class="caret"></b></p>
                   <p class="boot-line">[ OK ] Phantom Echoes / Steam</p>
                   <p class="boot-line">[ WIP ] The Last Peg / five seats</p>
-                  <p class="boot-line">[ READY ] Portfolio loaded</p>
+                  <p class="boot-line" id="crt-status">[ READY ] Portfolio loaded</p>
                 </div>
                 <div class="progress"><span></span></div>
                 <div class="crt-bottom"><span>PORTFOLIO.SYS</span><span>01 ▰▰▰</span></div>
@@ -60,7 +61,7 @@
           </div>
           <div class="stand"></div><div class="foot"></div>
         </div>
-        <div class="scene-index scene-bottom"><span>FIG 01 / AFTER DARK</span><span>SCAN RATE 60 HZ</span></div>
+        <div class="scene-index scene-bottom"><span>FIG 01 / AFTER DARK</span><button type="button" class="motion-toggle" hidden>Pause text</button></div>
       </div>
     </section>
     <div class="signal" aria-label="Areas of work">
