@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d0a">
+  <meta name="description" content="A development case study for NoteX Studios’ five-player social deception game.">
+  <title>The Last Peg | After Dark</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="v2.css?v=3">
+  
+</head><body class="subpage"><a class="skip" href="#content">Skip to content</a><header class="header"><div class="shell nav subnav"><a class="brand" href="./"><span class="mark" aria-hidden="true">&gt;_</span>VEDANSH<span class="dim">.DEV</span></a><nav aria-label="Main navigation"><a href="./#work">Work</a><a href="lab.html">Shader Lab</a><a href="./#contact">Contact</a></nav></div></header><main id="content">
+<section class="shell case-hero amber">
+  <a class="back-link" href="./#work">← Selected builds</a>
+  <div class="case-cover peg-cover"><div class="case-title"><p class="eyebrow">CASE STUDY 02 / IN DEVELOPMENT</p><h1>The Last<br>Peg<span>.</span></h1><p>FIVE PLAYERS / ONE TABLE</p></div><img src="last-peg-logo.webp" alt="Official The Last Peg game logo" fetchpriority="high"></div>
+  <div class="case-meta"><span>FIVE-PLAYER MULTIPLAYER</span><span>UNITY 6 / URP</span><span>NETCODE / RELAY</span></div>
+</section>
+<section class="shell case-split"><div><p class="eyebrow">THE PREMISE</p><h2>What’s in your glass<span>?</span></h2></div><div><p>Five players take a seat at an underground bar. One of the glasses is poisoned. A safe drink grants an ability, so taking a chance can give you an edge later in the match.</p><p>The shared table is where every decision plays out. Players can see each other, read the room, and change their minds about whom to trust.</p><a class="text-link" href="https://www.notexstudios.in/technology-1">See the official project page ↗</a></div></section>
+<section class="shell case-section amber" aria-labelledby="peg-flow"><p class="eyebrow">MATCH FLOW / INTERACTIVE DIAGRAM</p><h2 id="peg-flow">From lobby to table<span>.</span></h2>
+  <div class="flow-panel">
+    <div class="flow-table" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><strong>THE<br>LAST PEG</strong></div>
+    <div class="flow-copy"><p class="eyebrow">FIVE SEATS / ONE SESSION</p><h3>How the session moves</h3><p>Expand each stage to see what the player does and what the game handles behind the scenes.</p>
+      <details open><summary>01 · Join the lobby</summary><p>Sign in, then create or join a table. A join code lets friends enter the same session.</p></details>
+      <details><summary>02 · Take a seat</summary><p>The match starts with five players at one table. Everyone reads the room and decides whether to take a chance on their glass.</p></details>
+      <details><summary>03 · Resolve the round</summary><p>A safe drink grants an ability. The poisoned glass changes who survives and how the rest of the table plays the next round.</p></details>
+    </div>
+  </div>
+</section>
+<section class="shell case-section amber" aria-labelledby="peg-work"><p class="eyebrow">DEVELOPMENT NOTES</p><h2 id="peg-work">What went into it<span>.</span></h2>
+  <div class="case-cards">
+    <article><p class="eyebrow">01 / NETWORKING</p><h3>When the host leaves</h3><p>Unity Netcode for GameObjects and Relay connect the players. Distributed Authority lets the match continue when the original host disconnects.</p></article>
+    <article><p class="eyebrow">02 / PLAYER DATA</p><h3>From sign-in to play</h3><p>Authentication identifies the player, while Cloud Save stores player data separately from the live match.</p></article>
+    <article><p class="eyebrow">03 / ART DIRECTION</p><h3>A table you can read</h3><p>Worn leather, crimson, and muted brass set the mood. Keeping the center clear helps players track glasses and pay attention to the other seats.</p></article>
+  </div>
+</section>
+<section class="shell next-case"><a href="phantom-echoes.html"><span>ALSO IN THE PORTFOLIO / 01</span><strong>Phantom Echoes ↗</strong></a></section>
+</main><footer><div class="shell footer"><a class="brand" href="./">VEDANSH.DEV</a><span>AFTER DARK / NOTEX STUDIOS</span><a href="./#work">All projects ↗</a></div></footer></body></html>

@@ -141,7 +141,7 @@ const terminal = document.querySelector("#terminal-dialog");
 const output = document.querySelector("#terminal-output");
 const input = document.querySelector("#terminal-input");
 const form = document.querySelector("#terminal-form");
-const project = document.querySelector("#project-dialog");
+const elevator = document.querySelector("#elevator-game");
 
 function printLine(message, className = "", link) {
   const line = document.createElement("p");
@@ -159,11 +159,13 @@ function printLine(message, className = "", link) {
 }
 
 const commands = new Map([
-  ["help", () => printLine("help · projects · whoami · stack · contact · clear · exit")],
+  ["help", () => printLine("help · projects · whoami · stack · contact · lab · clear · exit")],
   ["projects", () => printLine("Phantom Echoes Chapter I (Steam) · The Last Peg (in development).", "", { href: "#work", label: "View projects ↗" })],
   ["whoami", () => printLine("Vedansh Yadav · NoteX founder · entrepreneur · game developer · programmer · 3D, VFX and shader artist · junior ethical hacker.", "", { href: "#about", label: "About ↗" })],
   ["stack", () => printLine("Python · C# · HTML · Unity · Blender · Git · and more.", "", { href: "#stack", label: "Full toolkit ↗" })],
   ["contact", () => printLine("Collaboration inbox:", "", { href: "mailto:esco.bar.001@gmail.com", label: "esco.bar.001@gmail.com" })],
+  ["lab", () => printLine("Graphics experiments:", "", { href: "lab.html", label: "Open Shader Lab ↗" })],
+  ["unlock", () => { terminal.close(); window.openElevator(); }],
   ["clear", () => output.replaceChildren()],
   ["exit", () => terminal.close()]
 ]);
@@ -196,24 +198,7 @@ document.querySelectorAll("[data-command]").forEach((button) => {
   });
 });
 
-document.querySelectorAll("[data-project]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const name = button.dataset.project;
-    project.classList.toggle("peg", name === "peg");
-    project.querySelector("#project-label").textContent = name === "peg" ? "02 / THE LAST PEG" : "01 / HOTEL MERIDIAN";
-    project.querySelector(".project-study").replaceChildren(document.querySelector(`#${name}-study`).content.cloneNode(true));
-    project.showModal();
-    project.scrollTop = 0;
-    project.querySelector("[data-close]").focus({ preventScroll: true });
-  });
-});
-
-project.addEventListener("scroll", () => {
-  if (reducedMotion.matches) return;
-  project.querySelector(".table-map")?.style.setProperty("--map-angle", `${Math.min(project.scrollTop * .35, 72)}deg`);
-}, { passive: true });
-
-for (const dialog of [terminal, project]) {
+for (const dialog of [terminal, elevator]) {
   dialog.querySelector("[data-close]").addEventListener("click", () => dialog.close());
   dialog.addEventListener("click", (event) => {
     if (event.target !== dialog) return;
@@ -223,7 +208,7 @@ for (const dialog of [terminal, project]) {
   });
 }
 
-const navLinks = [...document.querySelectorAll(".nav nav a")];
+const navLinks = [...document.querySelectorAll('.nav nav a[href^="#"]')];
 const sections = navLinks.map((link) => document.querySelector(link.getAttribute("href")));
 function updateNavigation() {
   const active = sections.findLastIndex((section) => section.getBoundingClientRect().top < innerHeight * .36);
@@ -234,3 +219,10 @@ function updateNavigation() {
 }
 window.addEventListener("scroll", updateNavigation, { passive: true });
 updateNavigation();
+
+
+document.querySelector(".footer-easter").addEventListener("click", () => {
+  terminal.showModal();
+  printLine("[ HOTEL MERIDIAN ] Emergency access key: unlock");
+  input.focus();
+});

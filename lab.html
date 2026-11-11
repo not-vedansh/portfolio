@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d0a">
+  <meta name="description" content="Explore live graphics effects with an adjustable before-and-after view.">
+  <title>Shader Lab | After Dark</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="v2.css?v=3">
+  <script src="lab.js?v=3" defer></script>
+</head><body class="subpage"><a class="skip" href="#content">Skip to content</a><header class="header"><div class="shell nav subnav"><a class="brand" href="./"><span class="mark" aria-hidden="true">&gt;_</span>VEDANSH<span class="dim">.DEV</span></a><nav aria-label="Main navigation"><a href="./#work">Work</a><a href="lab.html">Shader Lab</a><a href="./#contact">Contact</a></nav></div></header><main id="content">
+<section class="shell lab-head"><a class="back-link" href="./">← After Dark</a><p class="eyebrow">AFTER DARK / GRAPHICS EXPERIMENTS</p><h1>Shader Lab<span>.</span></h1><p>Drag the divider to compare a Steam gameplay still with live effects. Change the preset, then isolate a pass to see what it contributes.</p></section>
+<section class="shell lab-shell" aria-label="Interactive effects preview">
+  <div class="lab-view">
+    <div class="lab-monitor" id="lab-monitor">
+      <img class="lab-source" src="phantom-steam.jpg" alt="Steam screenshot of a green-lit hotel corridor" fetchpriority="high">
+      <canvas id="shader-output" aria-hidden="true"></canvas><div class="lab-divider" aria-hidden="true"><span>↔</span></div>
+      <span class="lab-badge left">ORIGINAL</span><span class="lab-badge right">EFFECTS</span>
+      <input id="compare" aria-label="Before and after divider" type="range" min="0" max="100" value="50">
+    </div>
+    <div class="lab-view-foot"><span>PHANTOM ECHOES / STEAM SCREENSHOT</span><output id="split-value" for="compare">50% ORIGINAL</output></div>
+  </div>
+  <aside class="lab-controls">
+    <p class="eyebrow" id="engine-status" role="status">INITIALIZING EFFECTS</p>
+    <h2>Effect controls</h2>
+    <fieldset><legend>Preset</legend><div class="presets">
+      <label><input type="radio" name="preset" value="green" checked><span>Night vision</span></label>
+      <label><input type="radio" name="preset" value="amber"><span>Emergency</span></label>
+      <label><input type="radio" name="preset" value="cold"><span>Signal loss</span></label>
+    </div></fieldset>
+    <fieldset><legend>Passes</legend>
+      <label class="switch"><input type="checkbox" id="grade" checked> Color grade</label>
+      <label class="switch"><input type="checkbox" id="glow" checked> Light bloom</label>
+      <label class="switch"><input type="checkbox" id="scan" checked> Scanlines</label>
+      <label class="switch"><input type="checkbox" id="aberration"> Chromatic split</label>
+    </fieldset>
+    <label class="slider-label" for="intensity">Intensity <output id="intensity-value" for="intensity">75%</output></label>
+    <input id="intensity" type="range" min="0" max="100" value="75">
+    <button class="button outline" type="button" id="reset-lab">Reset effects</button>
+  </aside>
+</section>
+<section class="shell case-section"><p class="eyebrow">RENDER BREAKDOWN</p><h2>One frame, four passes<span>.</span></h2><div class="case-cards"><article><h3>Color grade</h3><p>Maps the same source tones to a different palette. Compare the green phosphor, amber emergency light, and cold signal loss presets.</p></article><article><h3>Light bloom</h3><p>Samples bright neighboring pixels, then adds a soft halo to the light fixtures.</p></article><article><h3>CRT texture</h3><p>Scanlines alternate light and dark rows. Chromatic split offsets the red and blue channels near the edges.</p></article></div><p class="media-caption">These are browser effects applied to an official gameplay still. The original Unity render is on the left.</p></section>
+</main><footer><div class="shell footer"><a class="brand" href="./">VEDANSH.DEV</a><span>AFTER DARK / NOTEX STUDIOS</span><a href="./#work">All projects ↗</a></div></footer></body></html>
